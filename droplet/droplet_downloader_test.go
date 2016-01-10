@@ -75,4 +75,10 @@ var _ = Describe("DropletDownloader", func() {
 		})
 	})
 
+	Describe("Saveing a droplet to a file", func() {
+		It("Should write to a file", func() {
+
+		})
+	})
+
 })

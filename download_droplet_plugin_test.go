@@ -5,7 +5,7 @@ import (
 	. "github.com/krujos/download_droplet_plugin"
 
 	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
+	//. "github.com/onsi/gomega"
 )
 
 var _ = Describe("DownloadDropletPlugin", func() {

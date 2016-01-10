@@ -5,14 +5,18 @@ import (
 	"github.com/krujos/download_droplet_plugin/droplet"
 )
 
+type Droplet interface {
+	SaveDroplet(name string, path string) error
+}
+
 //Droplet utility for saving and whatnot.
-type Droplet struct {
+type CFDroplet struct {
 	Cli        plugin.CliConnection
 	Downloader droplet.Downloader
 }
 
 //SaveDroplet to the local filesystem.
-func (droplet *Droplet) SaveDroplet(name string, path string) error {
+func (droplet *CFDroplet) SaveDroplet(name string, path string) error {
 	guid, err := droplet.getGUID(name)
 	if nil != err {
 		return err
@@ -28,8 +32,7 @@ func (droplet *Droplet) SaveDroplet(name string, path string) error {
 	return nil
 }
 
-//GetGUID the GUID of an app
-func (droplet *Droplet) getGUID(appName string) (string, error) {
+func (droplet *CFDroplet) getGUID(appName string) (string, error) {
 	app, err := droplet.Cli.GetApp(appName)
 	return app.Guid, err
 }

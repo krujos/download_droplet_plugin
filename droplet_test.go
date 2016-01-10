@@ -12,15 +12,15 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("Droplet", func() {
+var _ = Describe("CFDroplet", func() {
 	var fakeCliConnection *cliFakes.FakeCliConnection
-	var droplet *Droplet
+	var droplet *CFDroplet
 	var fakeDownloader *fakes.FakeDownloader
 
 	BeforeEach(func() {
 		fakeCliConnection = &cliFakes.FakeCliConnection{}
 		fakeDownloader = &fakes.FakeDownloader{}
-		droplet = &Droplet{
+		droplet = &CFDroplet{
 			Cli:        fakeCliConnection,
 			Downloader: fakeDownloader,
 		}
@@ -51,7 +51,7 @@ var _ = Describe("Droplet", func() {
 		})
 	})
 
-	Describe("Saving the droplet", func() {
+	Describe("Saving the CFDroplet", func() {
 		BeforeEach(func() {
 			fakeCliConnection.GetAppReturns(plugin_models.GetAppModel{Guid: "1234"}, nil)
 		})
@@ -69,13 +69,13 @@ var _ = Describe("Droplet", func() {
 		})
 	})
 
-	Describe("Downloading the droplet", func() {
-		It("Should download the droplet", func() {
+	Describe("Downloading the CFDroplet", func() {
+		It("Should download the CFDroplet", func() {
 			droplet.SaveDroplet("bar", "/tmp")
 			Ω(fakeDownloader.GetDropletCallCount()).Should(Equal(1))
 		})
 
-		It("Should return an error if downloading the droplet fails", func() {
+		It("Should return an error if downloading the CFDroplet fails", func() {
 			droplet.SaveDroplet("bar", "/tmp")
 			fakeDownloader.GetDropletReturns(nil, errors.New("Download failed"))
 			err := droplet.SaveDroplet("bar", "/tmp")

@@ -2,14 +2,16 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/cloudfoundry/cli/plugin"
 )
 
 //DownloadDropletCmd is the plugin objectx
 type DownloadDropletCmd struct {
-	Cli plugin.CliConnection
 }
+
+type exiter func(code int)
 
 //GetMetadata returns metatada to the CF cli
 func (cmd *DownloadDropletCmd) GetMetadata() plugin.PluginMetadata {
@@ -23,7 +25,7 @@ func (cmd *DownloadDropletCmd) GetMetadata() plugin.PluginMetadata {
 		Commands: []plugin.Command{
 			{
 				Name:     "download-droplet",
-				HelpText: "Download a droplet",
+				HelpText: "Download a droplet to the local machine.",
 				UsageDetails: plugin.Usage{
 					Usage: "cf download-droplet",
 				},
@@ -32,10 +34,23 @@ func (cmd *DownloadDropletCmd) GetMetadata() plugin.PluginMetadata {
 	}
 }
 
+func (cmd *DownloadDropletCmd) usage() {
+
+}
+
 //Run runs the plugin
 func (cmd *DownloadDropletCmd) Run(cli plugin.CliConnection, args []string) {
-	if args[0] == "download-droplet" {
-		fmt.Println("Downloading Droplet!")
+	if len(args) != 3 {
+		cmd.usage()
+		os.Exit(1)
+	}
+	command := args[0]
+	appName := args[1]
+	path := args[2]
+	if command == "download-droplet" {
+		fmt.Printf("Saving %s's droplet to %s", appName, path)
+	} else {
+		fmt.Printf("%s is an unknown command.", args[0])
 	}
 }
 

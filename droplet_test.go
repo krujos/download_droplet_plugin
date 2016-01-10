@@ -32,7 +32,7 @@ var _ = Describe("Droplet", func() {
 		})
 
 	})
-	Describe("GetApp failures", func() {
+	Describe("Getting app details from cf failure scinerieos", func() {
 		BeforeEach(func() {
 			fakeCliConnection.GetAppReturns(plugin_models.GetAppModel{},
 				errors.New("Bad Things"))
@@ -43,5 +43,11 @@ var _ = Describe("Droplet", func() {
 			Ω(err).ShouldNot(BeNil())
 		})
 	})
+
+	// Describe("Downloading the droplet", func() {
+	// 	It("Should call download on the downloader", func() {
+	// 		Fail("NYI")
+	// 	})
+	// })
 
 })

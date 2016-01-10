@@ -8,7 +8,7 @@ import (
 
 //DownloadDropletCmd is the plugin objectx
 type DownloadDropletCmd struct {
-	cli plugin.CliConnection
+	Cli plugin.CliConnection
 }
 
 //GetMetadata returns metatada to the CF cli
@@ -41,4 +41,10 @@ func (cmd *DownloadDropletCmd) Run(cli plugin.CliConnection, args []string) {
 
 func main() {
 	plugin.Start(new(DownloadDropletCmd))
+}
+
+//Get the GUID of an app
+func (cmd *DownloadDropletCmd) GetGuid(appName string) (string, error) {
+	app, _ := cmd.Cli.GetApp(appName)
+	return app.Guid, nil
 }

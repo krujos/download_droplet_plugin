@@ -43,8 +43,15 @@ func main() {
 	plugin.Start(new(DownloadDropletCmd))
 }
 
-//GetGUIDthe GUID of an app
+//GetGUID the GUID of an app
 func (cmd *DownloadDropletCmd) GetGUID(appName string) (string, error) {
-	app, _ := cmd.Cli.GetApp(appName)
-	return app.Guid, nil
+	app, err := cmd.Cli.GetApp(appName)
+	return app.Guid, err
+}
+
+//GetDroplet from CF
+func (cmd *DownloadDropletCmd) GetDroplet(guid string) ([]byte, error) {
+	downloadURL := "/v2/apps/" + guid + "/droplet/download"
+	droplet, err := cmd.Cli.CliCommandWithoutTerminalOutput("curl", downloadURL)
+	return []byte(droplet[0]), err
 }

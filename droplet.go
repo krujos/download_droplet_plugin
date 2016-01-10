@@ -13,7 +13,15 @@ type Droplet struct {
 
 //SaveDroplet to the local filesystem.
 func (droplet *Droplet) SaveDroplet(name string, path string) error {
-	_, err := droplet.getGUID(name)
+	guid, err := droplet.getGUID(name)
+	if nil != err {
+		return err
+	}
+	data, err := droplet.Downloader.GetDroplet(guid)
+	if nil != err {
+		return err
+	}
+	err = droplet.Downloader.SaveDropletToFile(path, data)
 	if nil != err {
 		return err
 	}

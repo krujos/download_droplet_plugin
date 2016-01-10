@@ -8,11 +8,11 @@ import (
 
 //Downloader utility class to download droplets.
 type Downloader struct {
-	Cli        plugin.CliConnection
-	FileWriter FileWriter
+	Cli    plugin.CliConnection
+	Writer FileWriter
 }
 
-//Test shim for writing to a file.
+//FileWriter test shim for writing to a file.
 type FileWriter interface {
 	WriteFile(filename string, data []byte, perm os.FileMode) error
 }
@@ -31,6 +31,7 @@ func (downloader *Downloader) GetDroplet(guid string) ([]byte, error) {
 }
 
 //SaveDropletToFile writes a downloaded droplet to file
-func (downloader *Downloader) SaveDropletToFile(filePath string) error {
+func (downloader *Downloader) SaveDropletToFile(filePath string, data []byte) error {
+	downloader.Writer.WriteFile(filePath, data, 0644)
 	return nil
 }

@@ -2,22 +2,23 @@ package droplet_test
 
 import (
 	"errors"
+	"os"
 
-	. "github.com/krujos/download_droplet_plugin/droplet"
-
-	"github.com/cloudfoundry/cli/plugin/fakes"
+	cliFakes "github.com/cloudfoundry/cli/plugin/fakes"
 	"github.com/cloudfoundry/cli/plugin/models"
+	. "github.com/krujos/download_droplet_plugin/droplet"
+	"github.com/krujos/download_droplet_plugin/droplet/fakes"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
 
 var _ = Describe("DropletDownloader", func() {
 
-	var fakeCliConnection *fakes.FakeCliConnection
+	var fakeCliConnection *cliFakes.FakeCliConnection
 	var downloader *Downloader
 
 	BeforeEach(func() {
-		fakeCliConnection = &fakes.FakeCliConnection{}
+		fakeCliConnection = &cliFakes.FakeCliConnection{}
 		downloader = &Downloader{Cli: fakeCliConnection}
 	})
 
@@ -76,8 +77,15 @@ var _ = Describe("DropletDownloader", func() {
 	})
 
 	Describe("Saveing a droplet to a file", func() {
-		It("Should write to a file", func() {
-
+		tarFileContents := []byte("This is the droplet")
+		It("Should write the droplet to a file", func() {
+			fileWriter := new(fakes.FakeFileWriter)
+			dler := Downloader{Writer: fileWriter}
+			dler.SaveDropletToFile("/tmp", tarFileContents)
+			dir, data, mode := fileWriter.WriteFileArgsForCall(0)
+			Ω(dir).Should(Equal("/tmp"))
+			Ω(data).Should(Equal(tarFileContents))
+			Ω(mode).Should(Equal(os.FileMode(0644)))
 		})
 	})
 

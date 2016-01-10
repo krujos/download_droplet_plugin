@@ -14,11 +14,11 @@ import (
 var _ = Describe("DropletDownloader", func() {
 
 	var fakeCliConnection *cliFakes.FakeCliConnection
-	var downloader *DownloaderImpl
+	var downloader *CFDownloader
 
 	BeforeEach(func() {
 		fakeCliConnection = &cliFakes.FakeCliConnection{}
-		downloader = &DownloaderImpl{Cli: fakeCliConnection}
+		downloader = &CFDownloader{Cli: fakeCliConnection}
 	})
 
 	Describe("Downloading the droplet", func() {
@@ -49,11 +49,11 @@ var _ = Describe("DropletDownloader", func() {
 	Describe("Saveing a droplet to a file", func() {
 		tarFileContents := []byte("This is the droplet")
 		var fileWriter *fakes.FakeFileWriter
-		var downloader *DownloaderImpl
+		var downloader *CFDownloader
 
 		BeforeEach(func() {
 			fileWriter = new(fakes.FakeFileWriter)
-			downloader = &DownloaderImpl{Writer: fileWriter}
+			downloader = &CFDownloader{Writer: fileWriter}
 		})
 
 		It("Should write the droplet to a file", func() {

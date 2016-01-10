@@ -6,8 +6,8 @@ import (
 	"github.com/cloudfoundry/cli/plugin"
 )
 
-//DownloaderImpl real implementation to download droplets.
-type DownloaderImpl struct {
+//CFDownloader real implementation to download droplets.
+type CFDownloader struct {
 	Cli    plugin.CliConnection
 	Writer FileWriter
 }
@@ -24,13 +24,13 @@ type FileWriter interface {
 }
 
 //GetDroplet from CF
-func (downloader *DownloaderImpl) GetDroplet(guid string) ([]byte, error) {
+func (downloader *CFDownloader) GetDroplet(guid string) ([]byte, error) {
 	downloadURL := "/v2/apps/" + guid + "/droplet/download"
 	droplet, err := downloader.Cli.CliCommandWithoutTerminalOutput("curl", downloadURL)
 	return []byte(droplet[0]), err
 }
 
 //SaveDropletToFile writes a downloaded droplet to file
-func (downloader *DownloaderImpl) SaveDropletToFile(filePath string, data []byte) error {
+func (downloader *CFDownloader) SaveDropletToFile(filePath string, data []byte) error {
 	return downloader.Writer.WriteFile(filePath, data, 0644)
 }

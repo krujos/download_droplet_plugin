@@ -78,14 +78,25 @@ var _ = Describe("DropletDownloader", func() {
 
 	Describe("Saveing a droplet to a file", func() {
 		tarFileContents := []byte("This is the droplet")
+		var fileWriter *fakes.FakeFileWriter
+		var downloader *Downloader
+
+		BeforeEach(func() {
+			fileWriter = new(fakes.FakeFileWriter)
+			downloader = &Downloader{Writer: fileWriter}
+		})
+
 		It("Should write the droplet to a file", func() {
-			fileWriter := new(fakes.FakeFileWriter)
-			dler := Downloader{Writer: fileWriter}
-			dler.SaveDropletToFile("/tmp", tarFileContents)
+			downloader.SaveDropletToFile("/tmp", tarFileContents)
 			dir, data, mode := fileWriter.WriteFileArgsForCall(0)
 			Ω(dir).Should(Equal("/tmp"))
 			Ω(data).Should(Equal(tarFileContents))
 			Ω(mode).Should(Equal(os.FileMode(0644)))
+		})
+
+		It("should return the fs error if it has one", func() {
+			fileWriter.WriteFileReturns(errors.New("Broke!!!"))
+			Ω(downloader.SaveDropletToFile("/tmp", tarFileContents)).ShouldNot(BeNil())
 		})
 	})
 

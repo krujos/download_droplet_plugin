@@ -32,6 +32,5 @@ func (downloader *Downloader) GetDroplet(guid string) ([]byte, error) {
 
 //SaveDropletToFile writes a downloaded droplet to file
 func (downloader *Downloader) SaveDropletToFile(filePath string, data []byte) error {
-	downloader.Writer.WriteFile(filePath, data, 0644)
-	return nil
+	return downloader.Writer.WriteFile(filePath, data, 0644)
 }

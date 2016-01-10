@@ -43,8 +43,8 @@ func main() {
 	plugin.Start(new(DownloadDropletCmd))
 }
 
-//Get the GUID of an app
-func (cmd *DownloadDropletCmd) GetGuid(appName string) (string, error) {
+//GetGUIDthe GUID of an app
+func (cmd *DownloadDropletCmd) GetGUID(appName string) (string, error) {
 	app, _ := cmd.Cli.GetApp(appName)
 	return app.Guid, nil
 }

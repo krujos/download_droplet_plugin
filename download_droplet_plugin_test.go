@@ -24,11 +24,12 @@ var _ = Describe("DownloadDropletPlugin", func() {
 		})
 
 		It("Should retreive the a guid", func() {
-			Ω(downloadDropletPlugin.GetGuid("foo")).To(Equal("1234"))
+			Ω(downloadDropletPlugin.GetGUID("foo")).To(Equal("1234"))
 		})
 
 		It("Should call the plugin service to get the app", func() {
-			downloadDropletPlugin.GetGuid("foo")
+			downloadDropletPlugin.GetGUID("foo")
+			Ω(fakeCliConnection.GetAppArgsForCall(0)).Should(Equal("foo"))
 			Ω(fakeCliConnection.GetAppCallCount()).To(Equal(1))
 		})
 	})

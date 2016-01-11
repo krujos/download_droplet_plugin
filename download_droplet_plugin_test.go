@@ -27,11 +27,13 @@ var _ = Describe("DownloadDropletPlugin", func() {
 		// err                   error
 		fakeCliConnection     *fakes.FakeCliConnection
 		downloadDropletPlugin *DownloadDropletCmd
+		goodArgs              []string
 	)
 
 	BeforeEach(func() {
 		fakeCliConnection = &fakes.FakeCliConnection{}
 		downloadDropletPlugin = &DownloadDropletCmd{}
+		goodArgs = []string{"download-droplet", "theApp", "/tmp"}
 	})
 
 	Describe("GetMetadata", func() {
@@ -48,22 +50,21 @@ var _ = Describe("DownloadDropletPlugin", func() {
 	})
 
 	Describe("Run", func() {
-		It("pritns an informative message when downloading the droplet", func() {
-			output := io_helpers.CaptureOutput(func() {
-				downloadDropletPlugin.Run(fakeCliConnection, []string{"download-droplet", "theApp", "/tmp"})
+		Context("Messages", func() {
+			It("pritns an informative message when downloading the droplet", func() {
+				output := io_helpers.CaptureOutput(func() {
+					downloadDropletPlugin.Run(fakeCliConnection, goodArgs)
+				})
+				Ω(output[0]).To(Equal("Saving theApp's droplet to /tmp"))
 			})
-			Ω(output[0]).To(Equal("Saving theApp's droplet to /tmp"))
 		})
 
-		It("throws an error if the first arg is not download-droplet", func() {
-			output := io_helpers.CaptureOutput(func() {
-				downloadDropletPlugin.Run(fakeCliConnection, []string{"garbage", "foo", "/path"})
-			})
-			Ω(output[0]).To(ContainSubstring("unknown command"))
+		Context("Saving a droplet", func() {
+
 		})
 	})
 
-	Describe("Run - usage and other things that exit", func() {
+	Describe("Run - usage tests", func() {
 		var (
 			rpcHandlers  *fake_rpc_handlers.FakeHandlers
 			ts           *test_rpc_server.TestServer
@@ -107,18 +108,20 @@ var _ = Describe("DownloadDropletPlugin", func() {
 			ts.Stop()
 		})
 
-		It("exits 1 with bad arguments", func() {
-			command := exec.Command(pathToPlugin, args...)
-			session, err := gexec.Start(command, GinkgoWriter, GinkgoWriter)
-			Ω(err).ShouldNot(HaveOccurred())
-			Eventually(session).Should(gexec.Exit(1))
-		})
-
 		It("prints the usage & exits 1 when called with less than three arguments", func() {
 			command := exec.Command(pathToPlugin, args...)
 			session, err := gexec.Start(command, GinkgoWriter, GinkgoWriter)
 			Ω(err).ShouldNot(HaveOccurred())
 			Eventually(session).Should(gexec.Exit(1))
+			Eventually(session.Out).Should(gbytes.Say("cf download-droplet APP_NAME PATH"))
+		})
+
+		It("prings usage and exits 1 if the first arg is not download-droplet", func() {
+			command := exec.Command(pathToPlugin, []string{ts.Port(), "garbage", "foo", "/path"}...)
+			session, err := gexec.Start(command, GinkgoWriter, GinkgoWriter)
+			Ω(err).ShouldNot(HaveOccurred())
+			Eventually(session).Should(gexec.Exit(1))
+			Eventually(session.Out).Should(gbytes.Say("unknown command"))
 			Eventually(session.Out).Should(gbytes.Say("cf download-droplet APP_NAME PATH"))
 		})
 	})

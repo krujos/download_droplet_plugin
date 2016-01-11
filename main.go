@@ -50,7 +50,7 @@ func (cmd *DownloadDropletCmd) Run(cli plugin.CliConnection, args []string) {
 	appName := args[1]
 	path := args[2]
 	if command == "download-droplet" {
-		fmt.Printf("Saving %s's droplet to %s", appName, path)
+		fmt.Printf("Saving %s's droplet to %s\n", appName, path)
 		cmd.Drop.SaveDroplet(appName, path)
 	} else {
 		fmt.Printf("%s is an unknown command.", args[0])

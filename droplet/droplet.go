@@ -13,6 +13,15 @@ type CFDroplet struct {
 	Downloader Downloader
 }
 
+//NewCFDroplet builds a new CF droplet
+func NewCFDroplet(cli plugin.CliConnection, downloader Downloader) *CFDroplet {
+	return &CFDroplet{
+		Cli:        cli,
+		Downloader: downloader,
+	}
+
+}
+
 //SaveDroplet to the local filesystem.
 func (d *CFDroplet) SaveDroplet(name string, path string) error {
 	guid, err := d.getGUID(name)

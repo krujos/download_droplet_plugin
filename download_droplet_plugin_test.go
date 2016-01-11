@@ -4,12 +4,13 @@ import (
 	"errors"
 	"os/exec"
 
-	"github.com/cloudfoundry/cli/plugin/fakes"
+	cli_fakes "github.com/cloudfoundry/cli/plugin/fakes"
 	io_helpers "github.com/cloudfoundry/cli/testhelpers/io"
 	"github.com/cloudfoundry/cli/testhelpers/rpc_server"
 	fake_rpc_handlers "github.com/cloudfoundry/cli/testhelpers/rpc_server/fakes"
 	. "github.com/krujos/download_droplet_plugin"
 	fake_droplet "github.com/krujos/download_droplet_plugin/droplet/fakes"
+
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
@@ -21,7 +22,7 @@ const pluginPath = "./download-droplet-plugin"
 var _ = Describe("DownloadDropletPlugin", func() {
 
 	var (
-		fakeCliConnection     *fakes.FakeCliConnection
+		fakeCliConnection     *cli_fakes.FakeCliConnection
 		downloadDropletPlugin *DownloadDropletCmd
 		goodArgs              []string
 		uninstallArgs         []string
@@ -29,9 +30,10 @@ var _ = Describe("DownloadDropletPlugin", func() {
 	)
 
 	BeforeEach(func() {
-		fakeCliConnection = &fakes.FakeCliConnection{}
+		fakeCliConnection = &cli_fakes.FakeCliConnection{}
 		fakeDroplet = new(fake_droplet.FakeDroplet)
-		downloadDropletPlugin = &DownloadDropletCmd{Drop: fakeDroplet}
+		downloadDropletPlugin = &DownloadDropletCmd{}
+		downloadDropletPlugin.Drop = fakeDroplet
 		goodArgs = []string{"download-droplet", "theApp", "/tmp"}
 		uninstallArgs = []string{"CLI-MESSAGE-UNINSTALL"}
 	})
@@ -56,6 +58,12 @@ var _ = Describe("DownloadDropletPlugin", func() {
 					downloadDropletPlugin.Run(fakeCliConnection, goodArgs)
 				})
 				Ω(output[0]).To(Equal("Saving theApp's droplet to /tmp"))
+			})
+		})
+
+		Context("initializer complication", func() {
+			It("Should call the initializer during run", func() {
+				Fail("NYI")
 			})
 		})
 

@@ -6,12 +6,17 @@ import (
 
 	"github.com/cloudfoundry/cli/plugin"
 	"github.com/krujos/download_droplet_plugin/droplet"
+	"github.com/krujos/download_droplet_plugin/init"
 )
 
 //DownloadDropletCmd is the plugin objectx
 type DownloadDropletCmd struct {
-	Drop droplet.Droplet
+	Drop        droplet.Droplet
+	initializer init.PluginInitializer
 }
+
+//DownloadDropletCmdInitiliazer is the default plugin initilization implementation
+type DownloadDropletCmdInitiliazer struct{}
 
 //GetMetadata returns metatada to the CF cli
 func (cmd *DownloadDropletCmd) GetMetadata() plugin.PluginMetadata {
@@ -61,10 +66,22 @@ func (cmd *DownloadDropletCmd) Run(cli plugin.CliConnection, args []string) {
 	}
 }
 
-func main() {
-	d := new(droplet.CFDroplet)
-	cmd := new(DownloadDropletCmd)
-	cmd.Drop = d
-	plugin.Start(cmd)
+func NewDownloadDropletCmd(initializer init.PluginInitializer) *DownloadDropletCmd {
+	return nil
+}
 
+//InitializePlugin default (and real) implementation. We do it this way because
+//we don't have all the objects we need (the cli) to initialze it in main, but we
+//have to give the CLI back something to call run on, and then we need to be able
+//to test it.
+func (initalizer *DownloadDropletCmdInitiliazer) InitializePlugin(
+	cmd *DownloadDropletCmd, cli plugin.CliConnection) error {
+	return nil
+}
+
+func main() {
+	cmd := new(DownloadDropletCmd)
+	cmd.initializer = &DownloadDropletCmdInitiliazer{}
+	cmd.Drop = droplet.NewCFDroplet(nil, nil)
+	plugin.Start(cmd)
 }

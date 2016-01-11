@@ -1,11 +1,11 @@
-package main_test
+package droplet_test
 
 import (
 	"errors"
 
 	cliFakes "github.com/cloudfoundry/cli/plugin/fakes"
 	"github.com/cloudfoundry/cli/plugin/models"
-	. "github.com/krujos/download_droplet_plugin"
+	. "github.com/krujos/download_droplet_plugin/droplet"
 	"github.com/krujos/download_droplet_plugin/droplet/fakes"
 
 	. "github.com/onsi/ginkgo"

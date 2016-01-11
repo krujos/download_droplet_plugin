@@ -5,12 +5,10 @@ import (
 
 	"github.com/cloudfoundry/cli/plugin/fakes"
 	io_helpers "github.com/cloudfoundry/cli/testhelpers/io"
-	fake_rpc_handlers "github.com/cloudfoundry/cli/testhelpers/rpc_server/fakes"
-
 	"github.com/cloudfoundry/cli/testhelpers/rpc_server"
-
+	fake_rpc_handlers "github.com/cloudfoundry/cli/testhelpers/rpc_server/fakes"
 	. "github.com/krujos/download_droplet_plugin"
-
+	fake_droplet "github.com/krujos/download_droplet_plugin/droplet/fakes"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
@@ -22,17 +20,16 @@ const pluginPath = "./download-droplet-plugin"
 var _ = Describe("DownloadDropletPlugin", func() {
 
 	var (
-		// rpcHandlers           *fake_rpc_handlers.FakeHandlers
-		// ts                    *test_rpc_server.TestServer
-		// err                   error
 		fakeCliConnection     *fakes.FakeCliConnection
 		downloadDropletPlugin *DownloadDropletCmd
 		goodArgs              []string
+		fakeDroplet           *fake_droplet.FakeDroplet
 	)
 
 	BeforeEach(func() {
 		fakeCliConnection = &fakes.FakeCliConnection{}
-		downloadDropletPlugin = &DownloadDropletCmd{}
+		fakeDroplet = new(fake_droplet.FakeDroplet)
+		downloadDropletPlugin = &DownloadDropletCmd{Drop: fakeDroplet}
 		goodArgs = []string{"download-droplet", "theApp", "/tmp"}
 	})
 
@@ -60,7 +57,13 @@ var _ = Describe("DownloadDropletPlugin", func() {
 		})
 
 		Context("Saving a droplet", func() {
-
+			It("should call save dropplet with the right arguments", func() {
+				downloadDropletPlugin.Run(fakeCliConnection, goodArgs)
+				name, path := fakeDroplet.SaveDropletArgsForCall(0)
+				Ω(name).Should(Equal("theApp"))
+				Ω(path).Should(Equal("/tmp"))
+				Ω(fakeDroplet.SaveDropletCallCount()).To(Equal(1))
+			})
 		})
 	})
 

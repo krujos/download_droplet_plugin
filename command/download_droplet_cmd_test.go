@@ -62,6 +62,9 @@ var _ = Describe("DownloadDropletCmd", func() {
 		Context("initializer complication", func() {
 			It("Should call the initializer during run", func() {
 				downloadDropletPlugin.Run(fakeCliConnection, goodArgs)
+				cmd, cli := fakeInitiliazer.InitializePluginArgsForCall(0)
+				Ω(cmd).To(Equal(downloadDropletPlugin))
+				Ω(cli).To(Equal(fakeCliConnection))
 				Ω(fakeInitiliazer.InitializePluginCallCount()).Should(Equal(1))
 			})
 		})

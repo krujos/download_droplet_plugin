@@ -5,7 +5,6 @@ import (
 
 	"github.com/cloudfoundry/cli/testhelpers/rpc_server"
 	fake_rpc_handlers "github.com/cloudfoundry/cli/testhelpers/rpc_server/fakes"
-	. "github.com/krujos/download_droplet_plugin"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

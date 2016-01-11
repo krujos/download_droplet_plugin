@@ -28,6 +28,7 @@ type DownloadDropletCmdInitiliazer struct{}
 //to test it.
 func (initalizer *DownloadDropletCmdInitiliazer) InitializePlugin(
 	cmd *DownloadDropletCmd, cli plugin.CliConnection) error {
+	cmd.Drop = droplet.NewCFDroplet(cli, nil)
 	return nil
 }
 

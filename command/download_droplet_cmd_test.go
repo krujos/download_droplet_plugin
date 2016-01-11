@@ -43,6 +43,13 @@ var _ = Describe("DownloadDropletCmd", func() {
 	})
 
 	Describe("Run", func() {
+		var fakeDroplet *fake_droplet.FakeDroplet
+
+		BeforeEach(func() {
+			fakeDroplet = &fake_droplet.FakeDroplet{}
+			downloadDropletPlugin.Drop = fakeDroplet
+		})
+
 		Context("Messages", func() {
 			It("prints an informative message when downloading the droplet", func() {
 				output := io_helpers.CaptureOutput(func() {
@@ -60,12 +67,6 @@ var _ = Describe("DownloadDropletCmd", func() {
 		})
 
 		Describe("Saving a droplet", func() {
-			var fakeDroplet *fake_droplet.FakeDroplet
-
-			BeforeEach(func() {
-				fakeDroplet = &fake_droplet.FakeDroplet{}
-				downloadDropletPlugin.Drop = fakeDroplet
-			})
 
 			It("should call save dropplet with the right arguments", func() {
 				downloadDropletPlugin.Run(fakeCliConnection, goodArgs)

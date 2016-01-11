@@ -35,7 +35,7 @@ func (cmd *DownloadDropletCmd) GetMetadata() plugin.PluginMetadata {
 }
 
 func (cmd *DownloadDropletCmd) usage() {
-
+	fmt.Println("Usage: cf download-droplet APP_NAME PATH")
 }
 
 //Run runs the plugin

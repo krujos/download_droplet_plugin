@@ -19,7 +19,6 @@ func NewCFDroplet(cli plugin.CliConnection, downloader Downloader) *CFDroplet {
 		Cli:        cli,
 		Downloader: downloader,
 	}
-
 }
 
 //SaveDroplet to the local filesystem.

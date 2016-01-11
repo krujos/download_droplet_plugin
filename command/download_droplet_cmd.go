@@ -66,11 +66,17 @@ func (cmd *DownloadDropletCmd) Run(cli plugin.CliConnection, args []string) {
 		if len(args) != 3 {
 			cmd.usageAndExit()
 		}
-		cmd.initializer.InitializePlugin(cmd, cli)
 		appName := args[1]
 		path := args[2]
+
+		err := cmd.initializer.InitializePlugin(cmd, cli)
+		if nil != err {
+			fmt.Println(err)
+			return
+		}
+
 		fmt.Printf("Saving %s's droplet to %s\n", appName, path)
-		err := cmd.Drop.SaveDroplet(appName, path)
+		err = cmd.Drop.SaveDroplet(appName, path)
 		if nil != err {
 			fmt.Println(err)
 		}

@@ -67,6 +67,14 @@ var _ = Describe("DownloadDropletCmd", func() {
 				Ω(cli).To(Equal(fakeCliConnection))
 				Ω(fakeInitiliazer.InitializePluginCallCount()).Should(Equal(1))
 			})
+
+			It("Should handle errors from the initiliazers.", func() {
+				fakeInitiliazer.InitializePluginReturns(errors.New("Failed to init plugin."))
+				output := io_helpers.CaptureOutput(func() {
+					downloadDropletPlugin.Run(fakeCliConnection, goodArgs)
+				})
+				Ω(output[0]).To(Equal("Failed to init plugin."))
+			})
 		})
 
 		Describe("Saving a droplet", func() {

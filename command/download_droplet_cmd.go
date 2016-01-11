@@ -87,5 +87,7 @@ func (cmd *DownloadDropletCmd) Start() {
 
 //NewDownloadDropletCmd constructor / factory
 func NewDownloadDropletCmd(initializer PluginInitializer) *DownloadDropletCmd {
-	return nil
+	cmd := DownloadDropletCmd{}
+	cmd.initializer = initializer
+	return &cmd
 }

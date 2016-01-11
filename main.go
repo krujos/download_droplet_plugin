@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 
 	"github.com/cloudfoundry/cli/plugin"
@@ -42,18 +41,22 @@ func (cmd *DownloadDropletCmd) usageAndExit() {
 
 //Run runs the plugin
 func (cmd *DownloadDropletCmd) Run(cli plugin.CliConnection, args []string) {
-	log.Println(args)
-	if len(args) != 3 {
-		cmd.usageAndExit()
-	}
 	command := args[0]
-	appName := args[1]
-	path := args[2]
-	if command == "download-droplet" {
+	switch command {
+	case "download-droplet":
+		if len(args) != 3 {
+			cmd.usageAndExit()
+		}
+		appName := args[1]
+		path := args[2]
 		fmt.Printf("Saving %s's droplet to %s\n", appName, path)
-		cmd.Drop.SaveDroplet(appName, path)
-	} else {
-		fmt.Printf("%s is an unknown command.", args[0])
+		err := cmd.Drop.SaveDroplet(appName, path)
+		if nil != err {
+			fmt.Println(err)
+		}
+	case "CLI-MESSAGE-UNINSTALL":
+		fmt.Println("Thanks for using droplet downloader!")
+	default:
 		cmd.usageAndExit()
 	}
 }

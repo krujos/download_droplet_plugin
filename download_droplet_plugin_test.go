@@ -1,6 +1,7 @@
 package main_test
 
 import (
+	"errors"
 	"os/exec"
 
 	"github.com/cloudfoundry/cli/plugin/fakes"
@@ -23,6 +24,7 @@ var _ = Describe("DownloadDropletPlugin", func() {
 		fakeCliConnection     *fakes.FakeCliConnection
 		downloadDropletPlugin *DownloadDropletCmd
 		goodArgs              []string
+		uninstallArgs         []string
 		fakeDroplet           *fake_droplet.FakeDroplet
 	)
 
@@ -31,6 +33,7 @@ var _ = Describe("DownloadDropletPlugin", func() {
 		fakeDroplet = new(fake_droplet.FakeDroplet)
 		downloadDropletPlugin = &DownloadDropletCmd{Drop: fakeDroplet}
 		goodArgs = []string{"download-droplet", "theApp", "/tmp"}
+		uninstallArgs = []string{"CLI-MESSAGE-UNINSTALL"}
 	})
 
 	Describe("GetMetadata", func() {
@@ -64,10 +67,25 @@ var _ = Describe("DownloadDropletPlugin", func() {
 				Ω(path).Should(Equal("/tmp"))
 				Ω(fakeDroplet.SaveDropletCallCount()).To(Equal(1))
 			})
+
+			It("Should print an error message if an err is returned", func() {
+				fakeDroplet.SaveDropletReturns(errors.New("This is an error"))
+				output := io_helpers.CaptureOutput(func() {
+					downloadDropletPlugin.Run(fakeCliConnection, goodArgs)
+				})
+				Ω(output[1]).To(Equal("This is an error"))
+			})
+
+			It("Should print an uninstall message", func() {
+				output := io_helpers.CaptureOutput(func() {
+					downloadDropletPlugin.Run(fakeCliConnection, uninstallArgs)
+				})
+				Ω(output[0]).To(Equal("Thanks for using droplet downloader!"))
+			})
 		})
 	})
 
-	Describe("Run - usage tests", func() {
+	Describe("Run - integration tests", func() {
 		var (
 			rpcHandlers  *fake_rpc_handlers.FakeHandlers
 			ts           *test_rpc_server.TestServer
@@ -119,12 +137,11 @@ var _ = Describe("DownloadDropletPlugin", func() {
 			Eventually(session.Out).Should(gbytes.Say("cf download-droplet APP_NAME PATH"))
 		})
 
-		It("prings usage and exits 1 if the first arg is not download-droplet", func() {
+		It("prints usage and exits 1 if the first arg is not download-droplet", func() {
 			command := exec.Command(pathToPlugin, []string{ts.Port(), "garbage", "foo", "/path"}...)
 			session, err := gexec.Start(command, GinkgoWriter, GinkgoWriter)
 			Ω(err).ShouldNot(HaveOccurred())
 			Eventually(session).Should(gexec.Exit(1))
-			Eventually(session.Out).Should(gbytes.Say("unknown command"))
 			Eventually(session.Out).Should(gbytes.Say("cf download-droplet APP_NAME PATH"))
 		})
 	})

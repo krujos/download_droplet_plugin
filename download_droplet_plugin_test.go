@@ -124,7 +124,6 @@ var _ = Describe("DownloadDropletPlugin", func() {
 			}
 			args = []string{ts.Port(), "download-droplet"}
 			badArgs = []string{ts.Port(), "garbage", "foo", "/path"}
-
 		})
 
 		AfterEach(func() {

@@ -1,10 +1,8 @@
 package main
 
-import (
-	"github.com/krujos/download_droplet_plugin/cmd"
-)
+import "github.com/krujos/download_droplet_plugin/command"
 
 func main() {
-	cmd := cmd.NewDownloadDropletCmd(&cmd.DownloadDropletCmdInitiliazer{})
+	cmd := command.NewDownloadDropletCmd(&command.DownloadDropletCmdInitiliazer{})
 	cmd.Start()
 }

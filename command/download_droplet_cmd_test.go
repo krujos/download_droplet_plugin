@@ -1,13 +1,13 @@
-package cmd_test
+package command_test
 
 import (
 	"errors"
 
 	cli_fakes "github.com/cloudfoundry/cli/plugin/fakes"
 	io_helpers "github.com/cloudfoundry/cli/testhelpers/io"
-	. "github.com/krujos/download_droplet_plugin/cmd"
+	. "github.com/krujos/download_droplet_plugin/command"
+	cmd_fakes "github.com/krujos/download_droplet_plugin/command/fakes"
 	fake_droplet "github.com/krujos/download_droplet_plugin/droplet/fakes"
-
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
@@ -18,16 +18,17 @@ var _ = Describe("DownloadDropletCmd", func() {
 		downloadDropletPlugin *DownloadDropletCmd
 		goodArgs              []string
 		uninstallArgs         []string
-		fakeDroplet           *fake_droplet.FakeDroplet
+		fakeInitiliazer       *cmd_fakes.FakePluginInitializer
 	)
 
 	BeforeEach(func() {
 		fakeCliConnection = &cli_fakes.FakeCliConnection{}
-		fakeDroplet = new(fake_droplet.FakeDroplet)
-		downloadDropletPlugin = &DownloadDropletCmd{}
-		downloadDropletPlugin.Drop = fakeDroplet
+
+		fakeInitiliazer = &cmd_fakes.FakePluginInitializer{}
+		downloadDropletPlugin = NewDownloadDropletCmd(fakeInitiliazer)
 		goodArgs = []string{"download-droplet", "theApp", "/tmp"}
 		uninstallArgs = []string{"CLI-MESSAGE-UNINSTALL"}
+
 	})
 
 	Describe("GetMetadata", func() {
@@ -44,8 +45,15 @@ var _ = Describe("DownloadDropletCmd", func() {
 	})
 
 	Describe("Run", func() {
+		var fakeDroplet *fake_droplet.FakeDroplet
+
+		BeforeEach(func() {
+			fakeDroplet = new(fake_droplet.FakeDroplet)
+			downloadDropletPlugin.Drop = fakeDroplet
+		})
+
 		Context("Messages", func() {
-			It("pritns an informative message when downloading the droplet", func() {
+			It("prints an informative message when downloading the droplet", func() {
 				output := io_helpers.CaptureOutput(func() {
 					downloadDropletPlugin.Run(fakeCliConnection, goodArgs)
 				})
@@ -55,7 +63,8 @@ var _ = Describe("DownloadDropletCmd", func() {
 
 		Context("initializer complication", func() {
 			It("Should call the initializer during run", func() {
-				Fail("NYI")
+				downloadDropletPlugin.Run(fakeCliConnection, goodArgs)
+				Ω(fakeInitiliazer.InitializePluginCallCount()).Should(Equal(1))
 			})
 		})
 

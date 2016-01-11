@@ -1,4 +1,4 @@
-package cmd
+package command
 
 import (
 	"fmt"
@@ -65,6 +65,7 @@ func (cmd *DownloadDropletCmd) Run(cli plugin.CliConnection, args []string) {
 		if len(args) != 3 {
 			cmd.usageAndExit()
 		}
+		cmd.initializer.InitializePlugin(cmd, cli)
 		appName := args[1]
 		path := args[2]
 		fmt.Printf("Saving %s's droplet to %s\n", appName, path)

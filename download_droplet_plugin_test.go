@@ -92,6 +92,7 @@ var _ = Describe("DownloadDropletPlugin", func() {
 			err          error
 			pathToPlugin string
 			args         []string
+			badArgs      []string
 		)
 
 		BeforeSuite(func() {
@@ -122,6 +123,7 @@ var _ = Describe("DownloadDropletPlugin", func() {
 				return nil
 			}
 			args = []string{ts.Port(), "download-droplet"}
+			badArgs = []string{ts.Port(), "garbage", "foo", "/path"}
 
 		})
 
@@ -138,7 +140,7 @@ var _ = Describe("DownloadDropletPlugin", func() {
 		})
 
 		It("prints usage and exits 1 if the first arg is not download-droplet", func() {
-			command := exec.Command(pathToPlugin, []string{ts.Port(), "garbage", "foo", "/path"}...)
+			command := exec.Command(pathToPlugin, badArgs...)
 			session, err := gexec.Start(command, GinkgoWriter, GinkgoWriter)
 			Ω(err).ShouldNot(HaveOccurred())
 			Eventually(session).Should(gexec.Exit(1))

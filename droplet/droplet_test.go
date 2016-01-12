@@ -22,7 +22,7 @@ var _ = Describe("CFDroplet", func() {
 		fakeDownloader = &fakes.FakeDownloader{}
 		droplet = NewCFDroplet(fakeCliConnection, fakeDownloader)
 		Ω(droplet.Cli).Should(Equal(fakeCliConnection))
-		Ω(droplet.Downloader).Should(Equal(fakeDownloader))
+		Ω(droplet.GetDownloader()).ShouldNot(BeNil())
 	})
 
 	Describe("Getting the app details from cf", func() {
@@ -80,7 +80,6 @@ var _ = Describe("CFDroplet", func() {
 			err := droplet.SaveDroplet("bar", "/tmp")
 			Ω(err).NotTo(BeNil())
 		})
-
 	})
 
 })

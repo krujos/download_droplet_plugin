@@ -20,7 +20,16 @@ type PluginInitializer interface {
 }
 
 //DownloadDropletCmdInitiliazer is the default plugin initilization implementation
-type DownloadDropletCmdInitiliazer struct{}
+type DownloadDropletCmdInitiliazer struct {
+	writer droplet.FileWriter
+}
+
+//NewDownloadDropletCmdInitiliazer provides a factory for initializers
+func NewDownloadDropletCmdInitiliazer() *DownloadDropletCmdInitiliazer {
+	initer := DownloadDropletCmdInitiliazer{}
+	initer.writer = new(droplet.CFFileWriter)
+	return &initer
+}
 
 //InitializePlugin default (and real) implementation. We do it this way because
 //we don't have all the objects we need (the cli) to initialze it in main, but we
@@ -28,7 +37,11 @@ type DownloadDropletCmdInitiliazer struct{}
 //to test it.
 func (initalizer *DownloadDropletCmdInitiliazer) InitializePlugin(
 	cmd *DownloadDropletCmd, cli plugin.CliConnection) error {
-	cmd.Drop = droplet.NewCFDroplet(cli, nil)
+	downloader := &droplet.CFDownloader{
+		Cli:    cli,
+		Writer: initalizer.writer,
+	}
+	cmd.Drop = droplet.NewCFDroplet(cli, downloader)
 	return nil
 }
 

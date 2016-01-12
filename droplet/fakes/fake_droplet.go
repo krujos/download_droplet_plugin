@@ -17,6 +17,12 @@ type FakeDroplet struct {
 	saveDropletReturns struct {
 		result1 error
 	}
+	GetDownloaderStub        func() *droplet.Downloader
+	getDownloaderMutex       sync.RWMutex
+	getDownloaderArgsForCall []struct{}
+	getDownloaderReturns struct {
+		result1 *droplet.Downloader
+	}
 }
 
 func (fake *FakeDroplet) SaveDroplet(name string, path string) error {
@@ -49,6 +55,30 @@ func (fake *FakeDroplet) SaveDropletReturns(result1 error) {
 	fake.SaveDropletStub = nil
 	fake.saveDropletReturns = struct {
 		result1 error
+	}{result1}
+}
+
+func (fake *FakeDroplet) GetDownloader() *droplet.Downloader {
+	fake.getDownloaderMutex.Lock()
+	fake.getDownloaderArgsForCall = append(fake.getDownloaderArgsForCall, struct{}{})
+	fake.getDownloaderMutex.Unlock()
+	if fake.GetDownloaderStub != nil {
+		return fake.GetDownloaderStub()
+	} else {
+		return fake.getDownloaderReturns.result1
+	}
+}
+
+func (fake *FakeDroplet) GetDownloaderCallCount() int {
+	fake.getDownloaderMutex.RLock()
+	defer fake.getDownloaderMutex.RUnlock()
+	return len(fake.getDownloaderArgsForCall)
+}
+
+func (fake *FakeDroplet) GetDownloaderReturns(result1 *droplet.Downloader) {
+	fake.GetDownloaderStub = nil
+	fake.getDownloaderReturns = struct {
+		result1 *droplet.Downloader
 	}{result1}
 }
 

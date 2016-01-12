@@ -10,11 +10,6 @@ build:
     # at the right place in the workspace tree
     - setup-go-workspace
 
-    # Gets the dependencies
-    - script:
-        name: go get
-        code: |
-          go get
     - script:
         name: Get dependencies
         code: |-
@@ -23,12 +18,12 @@ build:
             go install github.com/onsi/ginkgo/ginkgo
     # Build the project
     - script:
-        name: go build
+        name: godep go build
         code: |
-          go build ./...
+          godep go build ./...
 
     # Test the project
     - script:
-        name: go test
+        name: test
         code: |
           ginkgo -r

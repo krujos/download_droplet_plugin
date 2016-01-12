@@ -22,3 +22,4 @@ _testmain.go
 *.test
 *.prof
 download_droplet_plugin
+command/download_droplet_cmd.go.bak

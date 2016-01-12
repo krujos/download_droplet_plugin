@@ -7,6 +7,8 @@ even if the app won't start, the only requirement is the stager successfully bui
 a droplet. It's useful for troubleshooting and you can't figure out what else to
 do (like [this](https://github.com/krujos/goservice)).
 
+[![wercker status](https://app.wercker.com/status/5a81018d727eb6dbc91b5c352d8c0e1e/m "wercker status")](https://app.wercker.com/project/bykey/5a81018d727eb6dbc91b5c352d8c0e1e)
+
 # Usage
 ```
 $ cf download-droplet

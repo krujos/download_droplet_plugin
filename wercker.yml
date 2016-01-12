@@ -27,4 +27,4 @@ build:
     - script:
         name: test
         code: |
-          ginkgo -r
+          godep go test ./...

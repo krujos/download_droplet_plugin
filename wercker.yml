@@ -10,6 +10,10 @@ build:
     # at the right place in the workspace tree
     - setup-go-workspace
 
+    - script:
+        name: Get dependencies
+        code: |-
+            go get github.com/tools/godep
     # Build the project
     - script:
         name: godep go build

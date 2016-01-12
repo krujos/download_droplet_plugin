@@ -20,10 +20,9 @@ var _ = Describe("CFDroplet", func() {
 	BeforeEach(func() {
 		fakeCliConnection = &cliFakes.FakeCliConnection{}
 		fakeDownloader = &fakes.FakeDownloader{}
-		droplet = &CFDroplet{
-			Cli:        fakeCliConnection,
-			Downloader: fakeDownloader,
-		}
+		droplet = NewCFDroplet(fakeCliConnection, fakeDownloader)
+		Ω(droplet.Cli).Should(Equal(fakeCliConnection))
+		Ω(droplet.GetDownloader()).ShouldNot(BeNil())
 	})
 
 	Describe("Getting the app details from cf", func() {
@@ -81,7 +80,6 @@ var _ = Describe("CFDroplet", func() {
 			err := droplet.SaveDroplet("bar", "/tmp")
 			Ω(err).NotTo(BeNil())
 		})
-
 	})
 
 })

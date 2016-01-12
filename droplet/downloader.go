@@ -1,6 +1,7 @@
 package droplet
 
 import (
+	"io/ioutil"
 	"os"
 
 	"github.com/cloudfoundry/cli/plugin"
@@ -21,6 +22,15 @@ type Downloader interface {
 //FileWriter test shim for writing to a file.
 type FileWriter interface {
 	WriteFile(filename string, data []byte, perm os.FileMode) error
+}
+
+//CFFileWriter is a wrapper for ioutil.WriteFile
+type CFFileWriter struct {
+}
+
+//WriteFile to disk
+func (fw *CFFileWriter) WriteFile(filename string, data []byte, perm os.FileMode) error {
+	return ioutil.WriteFile(filename, data, perm)
 }
 
 //GetDroplet from CF

@@ -1,0 +1,21 @@
+- name: Download Droplet
+  description: Download droplets to your local machine
+  version: _TAG_
+  created: 2016-1-11
+  updated: 2016-1-11
+  company:
+  authors:
+  - name: Josh Kruck
+    homepage: http://github.com/krujos/
+    contact: jkruck@pivotal.io
+  homepage: https://github.com/krujos/download_droplet_plugin
+  binaries:
+  - platform: osx
+    url: https://github.com/krujos/download_droplet_pluginraw/_TAG_/bin/osx/download_droplet_plugin
+    checksum: osx-sha1
+  - platform: win64
+    url: https://github.com/krujos/download_droplet_plugin/raw/_TAG_/bin/win64/download_droplet_plugin.exe
+    checksum: win64-sha1
+  - platform: linux64
+    url: https://github.com/krujos/download_droplet_plugin/raw/_TAG_/bin/linux64/download_droplet_plugin
+    checksum: linux64-sha1

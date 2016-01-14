@@ -57,7 +57,7 @@ x ./app/bin/goservice
 
 ```
 # Installation
-## Install from CLI (Waiting on merge, won't work until [#57](https://github.com/cloudfoundry-incubator/cli-plugin-repo/pull/57) is closed)
+## Install from CLI
 ```
 $ cf add-plugin-repo CF-Community http://plugins.cloudfoundry.org/
 $ cf install-plugin 'Download Droplet' -r CF-Community

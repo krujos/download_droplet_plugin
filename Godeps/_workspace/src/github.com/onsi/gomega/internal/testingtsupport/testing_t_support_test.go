@@ -1,7 +1,7 @@
 package testingtsupport_test
 
 import (
-	. "github.com/onsi/gomega"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/gomega"
 
 	"testing"
 )

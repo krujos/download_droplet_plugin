@@ -2,8 +2,8 @@ package leafnodes
 
 import (
 	"encoding/json"
-	"github.com/onsi/ginkgo/internal/failer"
-	"github.com/onsi/ginkgo/types"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/internal/failer"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/types"
 	"io/ioutil"
 	"net/http"
 	"time"

@@ -3,17 +3,17 @@ package spec_test
 import (
 	"time"
 
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
-	"github.com/onsi/gomega/gbytes"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/gomega"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/gomega/gbytes"
 
-	. "github.com/onsi/ginkgo/internal/spec"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/internal/spec"
 
-	"github.com/onsi/ginkgo/internal/codelocation"
-	"github.com/onsi/ginkgo/internal/containernode"
-	Failer "github.com/onsi/ginkgo/internal/failer"
-	"github.com/onsi/ginkgo/internal/leafnodes"
-	"github.com/onsi/ginkgo/types"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/internal/codelocation"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/internal/containernode"
+	Failer "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/internal/failer"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/internal/leafnodes"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/types"
 )
 
 var noneFlag = types.FlagTypeNone

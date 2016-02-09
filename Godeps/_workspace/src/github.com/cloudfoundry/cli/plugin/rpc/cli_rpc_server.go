@@ -9,8 +9,8 @@ import (
 	"github.com/cloudfoundry/cli/cf/command_registry"
 	"github.com/cloudfoundry/cli/cf/configuration/core_config"
 	"github.com/cloudfoundry/cli/cf/terminal"
-	"github.com/cloudfoundry/cli/plugin"
-	"github.com/cloudfoundry/cli/plugin/models"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/cloudfoundry/cli/plugin"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/cloudfoundry/cli/plugin/models"
 
 	"fmt"
 	"net"

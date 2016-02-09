@@ -1,13 +1,13 @@
 package remote_test
 
 import (
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/gomega"
 
-	"github.com/onsi/ginkgo/config"
-	. "github.com/onsi/ginkgo/internal/remote"
-	st "github.com/onsi/ginkgo/reporters/stenographer"
-	"github.com/onsi/ginkgo/types"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/config"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/internal/remote"
+	st "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/reporters/stenographer"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/types"
 	"time"
 )
 

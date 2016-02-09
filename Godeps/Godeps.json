@@ -1,17 +1,9 @@
 {
 	"ImportPath": "github.com/krujos/download_droplet_plugin",
 	"GoVersion": "go1.5",
-	"Packages": [
-		"./..."
-	],
 	"Deps": [
 		{
 			"ImportPath": "github.com/cloudfoundry/cli/plugin",
-			"Comment": "v6.14.1-61-ge1f3e51",
-			"Rev": "e1f3e518c17d085c483d9c06b2153b03cee0d959"
-		},
-		{
-			"ImportPath": "github.com/cloudfoundry/cli/testhelpers/io",
 			"Comment": "v6.14.1-61-ge1f3e51",
 			"Rev": "e1f3e518c17d085c483d9c06b2153b03cee0d959"
 		},

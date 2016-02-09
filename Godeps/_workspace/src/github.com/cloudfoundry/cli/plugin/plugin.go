@@ -1,6 +1,6 @@
 package plugin
 
-import "github.com/cloudfoundry/cli/plugin/models"
+import "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/cloudfoundry/cli/plugin/models"
 
 /**
 	Command interface needs to be implemented for a runnable plugin of `cf`

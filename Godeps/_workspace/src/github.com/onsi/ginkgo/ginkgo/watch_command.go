@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/onsi/ginkgo/config"
-	"github.com/onsi/ginkgo/ginkgo/interrupthandler"
-	"github.com/onsi/ginkgo/ginkgo/testrunner"
-	"github.com/onsi/ginkgo/ginkgo/testsuite"
-	"github.com/onsi/ginkgo/ginkgo/watch"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/config"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/ginkgo/interrupthandler"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/ginkgo/testrunner"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/ginkgo/testsuite"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/ginkgo/watch"
 )
 
 func BuildWatchCommand() *Command {

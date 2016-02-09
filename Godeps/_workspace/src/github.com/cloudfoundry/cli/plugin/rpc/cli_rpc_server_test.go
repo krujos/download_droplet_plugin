@@ -14,15 +14,15 @@ import (
 	"github.com/cloudfoundry/cli/cf/models"
 	"github.com/cloudfoundry/cli/cf/terminal"
 	"github.com/cloudfoundry/cli/cf/terminal/fakes"
-	"github.com/cloudfoundry/cli/plugin"
-	"github.com/cloudfoundry/cli/plugin/models"
-	. "github.com/cloudfoundry/cli/plugin/rpc"
-	cmdRunner "github.com/cloudfoundry/cli/plugin/rpc"
-	. "github.com/cloudfoundry/cli/plugin/rpc/fake_command"
-	fakeRunner "github.com/cloudfoundry/cli/plugin/rpc/fakes"
 	testconfig "github.com/cloudfoundry/cli/testhelpers/configuration"
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/cloudfoundry/cli/plugin"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/cloudfoundry/cli/plugin/models"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/cloudfoundry/cli/plugin/rpc"
+	cmdRunner "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/cloudfoundry/cli/plugin/rpc"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/cloudfoundry/cli/plugin/rpc/fake_command"
+	fakeRunner "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/cloudfoundry/cli/plugin/rpc/fakes"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/gomega"
 )
 
 var _ = Describe("Server", func() {

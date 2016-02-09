@@ -5,7 +5,7 @@ import (
 	"math"
 	"time"
 
-	"github.com/onsi/ginkgo/ginkgo/testsuite"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/ginkgo/testsuite"
 )
 
 type Suite struct {

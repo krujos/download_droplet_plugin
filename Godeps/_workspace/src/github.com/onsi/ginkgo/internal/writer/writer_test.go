@@ -1,11 +1,11 @@
 package writer_test
 
 import (
-	"github.com/onsi/gomega/gbytes"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/gomega/gbytes"
 
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/ginkgo/internal/writer"
-	. "github.com/onsi/gomega"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/internal/writer"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/gomega"
 )
 
 var _ = Describe("Writer", func() {

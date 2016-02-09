@@ -2,7 +2,7 @@ package matchers
 
 import (
 	"fmt"
-	"github.com/onsi/gomega/format"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/gomega/format"
 	"reflect"
 )
 

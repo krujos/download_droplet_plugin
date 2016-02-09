@@ -4,8 +4,8 @@ import (
 	"path/filepath"
 
 	"github.com/cloudfoundry/cli/testhelpers/plugin_builder"
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/gomega"
 
 	"testing"
 )

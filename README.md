@@ -20,7 +20,7 @@ $ file gocf.tar
 gocf.tar: gzip compressed data, from Unix, last modified: Fri Jan  8 22:13:58 2016
 
 Saving gocf's droplet to /tmp/gocf.tar
-➜  /tmp  tar -xvf gocf.tar     
+➜  /tmp  tar -xvmf gocf.tar     
 x ./: Can't update time for .
 x ./staging_info.yml
 x ./logs/

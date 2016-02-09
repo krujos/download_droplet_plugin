@@ -2,13 +2,13 @@ package rpc_test
 
 import (
 	"github.com/cloudfoundry/cli/cf/command_registry"
-	. "github.com/cloudfoundry/cli/plugin/rpc"
-	. "github.com/cloudfoundry/cli/plugin/rpc/fake_command"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/cloudfoundry/cli/plugin/rpc"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/cloudfoundry/cli/plugin/rpc/fake_command"
 
 	. "github.com/cloudfoundry/cli/testhelpers/matchers"
 	testterm "github.com/cloudfoundry/cli/testhelpers/terminal"
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/gomega"
 )
 
 var _ = Describe("calling commands in command_registry", func() {

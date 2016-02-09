@@ -5,7 +5,7 @@ import (
 	"sync"
 
 	"github.com/cloudfoundry/cli/cf/command_registry"
-	"github.com/cloudfoundry/cli/plugin/rpc"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/cloudfoundry/cli/plugin/rpc"
 )
 
 type FakeNonCodegangstaRunner struct {

@@ -11,8 +11,8 @@ import (
 	"sync"
 	"syscall"
 
-	. "github.com/onsi/gomega"
-	"github.com/onsi/gomega/gbytes"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/gomega"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/gomega/gbytes"
 )
 
 const INVALID_EXIT_CODE = 254

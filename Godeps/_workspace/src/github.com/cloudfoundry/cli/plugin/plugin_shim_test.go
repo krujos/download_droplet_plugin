@@ -4,13 +4,13 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"github.com/cloudfoundry/cli/plugin"
-	"github.com/cloudfoundry/cli/testhelpers/rpc_server"
-	fake_rpc_handlers "github.com/cloudfoundry/cli/testhelpers/rpc_server/fakes"
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
-	"github.com/onsi/gomega/gbytes"
-	. "github.com/onsi/gomega/gexec"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/cloudfoundry/cli/plugin"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/cloudfoundry/cli/testhelpers/rpc_server"
+	fake_rpc_handlers "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/cloudfoundry/cli/testhelpers/rpc_server/fakes"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/gomega"
+	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/gomega/gbytes"
+	. "github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/gomega/gexec"
 )
 
 var _ = Describe("Command", func() {

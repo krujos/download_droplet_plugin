@@ -8,7 +8,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/cloudfoundry/cli/plugin/models"
+	"github.com/cloudfoundry/cli/plugin/models"
 )
 
 type cliConnection struct {

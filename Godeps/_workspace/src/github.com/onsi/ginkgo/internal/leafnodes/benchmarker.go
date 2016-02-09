@@ -6,7 +6,7 @@ import (
 
 	"sync"
 
-	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/types"
+	"github.com/onsi/ginkgo/types"
 )
 
 type benchmarker struct {

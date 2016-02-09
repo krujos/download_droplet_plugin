@@ -4,9 +4,9 @@ package fakes
 import (
 	"sync"
 
-	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/cloudfoundry/cli/plugin"
-	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/cloudfoundry/cli/plugin/models"
-	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/cloudfoundry/cli/testhelpers/rpc_server"
+	"github.com/cloudfoundry/cli/plugin"
+	"github.com/cloudfoundry/cli/plugin/models"
+	"github.com/cloudfoundry/cli/testhelpers/rpc_server"
 )
 
 type FakeHandlers struct {

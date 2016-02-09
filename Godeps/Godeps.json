@@ -1,16 +1,24 @@
 {
 	"ImportPath": "github.com/krujos/download_droplet_plugin",
 	"GoVersion": "go1.5",
+	"Packages": [
+		"./..."
+	],
 	"Deps": [
 		{
 			"ImportPath": "github.com/cloudfoundry/cli/plugin",
-			"Comment": "v6.14.1-61-ge1f3e51",
-			"Rev": "e1f3e518c17d085c483d9c06b2153b03cee0d959"
+			"Comment": "v6.15.0-42-g0186957",
+			"Rev": "0186957e4ccd54cd0adcdc0d9314b4e23f7923a4"
+		},
+		{
+			"ImportPath": "github.com/cloudfoundry/cli/testhelpers/io",
+			"Comment": "v6.15.0-42-g0186957",
+			"Rev": "0186957e4ccd54cd0adcdc0d9314b4e23f7923a4"
 		},
 		{
 			"ImportPath": "github.com/cloudfoundry/cli/testhelpers/rpc_server",
-			"Comment": "v6.14.1-61-ge1f3e51",
-			"Rev": "e1f3e518c17d085c483d9c06b2153b03cee0d959"
+			"Comment": "v6.15.0-42-g0186957",
+			"Rev": "0186957e4ccd54cd0adcdc0d9314b4e23f7923a4"
 		},
 		{
 			"ImportPath": "github.com/onsi/ginkgo",

@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/krujos/download_droplet_plugin/Godeps/_workspace/src/github.com/onsi/ginkgo/ginkgo/convert"
+	"github.com/onsi/ginkgo/ginkgo/convert"
 	"os"
 )
 

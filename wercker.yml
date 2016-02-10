@@ -8,7 +8,8 @@ build:
   steps:
     # Sets the go workspace and places you package
     # at the right place in the workspace tree
-    - setup-go-workspace
+    - wercker/setup-go-workspace:
+       package-dir: github.com/krujos/download_droplet_plugin
 
     - script:
         name: Get dependencies
@@ -17,7 +18,7 @@ build:
             go get github.com/onsi/ginkgo
             go get github.com/onsi/gomega
             go install github.com/onsi/ginkgo/ginkgo
-    # Build the project
+    # Build the project do we need this?
     - script:
         name: godep go build
         code: |
@@ -28,3 +29,19 @@ build:
         name: test
         code: |
           godep go test ./...
+
+    # Integration test
+    - script:
+        name: Integration test
+        code: |
+         godep go build
+         wget https://cli.run.pivotal.io/stable\?release\=linux64-binary\&source\=github -O cli.tgz
+         tar -xvf cli.tgz
+         chmod +x ./cf
+         ./cf api api.run.pivotal.io
+         ./cf auth $cfuser "$cfpass"
+         ./cf target -s $cfspace -o $cforg
+         ls -al
+         ./cf install-plugin -f download_droplet_plugin
+         ./cf download-droplet download-droplet-integration-testapp ./droplet.tar
+         tar -xvmf droplet.tar

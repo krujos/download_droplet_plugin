@@ -23,3 +23,6 @@ _testmain.go
 *.prof
 download_droplet_plugin
 command/download_droplet_cmd.go.bak
+env.sh
+_*
+

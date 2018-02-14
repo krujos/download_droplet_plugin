@@ -3,6 +3,7 @@
 OUTPUT=$(pwd)/dependencies
 
 export GOPATH=$(pwd)/go
+export PATH=$GOPATH/bin:$PATH
 
 go get -u github.com/golang/dep/cmd/dep
 go install github.com/golang/dep

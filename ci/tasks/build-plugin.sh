@@ -4,6 +4,7 @@ OUTPUT=$(pwd)/built-plugins
 version_file=$(pwd)/version/number
 
 export GOPATH=$(pwd)/go
+export PATH=$GOPATH/bin:$PATH
 
 cd ${GOPATH}/src/github.com/krujos/download_droplet_plugin
 

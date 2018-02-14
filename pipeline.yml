@@ -8,13 +8,13 @@ resources:
     ignore_paths:
     - RELEASE_NOTES.md
 
-- name: release-notes
-  type: git
-  source:
-    uri: ((git_repository_url))
-    private_key: ((git_private_key))
-    paths:
-    - RELEASE_NOTES.md
+# - name: release-notes
+#   type: git
+#   source:
+#     uri: ((git_repository_url))
+#     private_key: ((git_private_key))
+#     paths:
+#     - RELEASE_NOTES.md
 
 - name: cf-cli
   type: github-release
@@ -31,11 +31,11 @@ resources:
     access_token: ((github_access_token))
     drafts: true
 
-- name: plugin-site
-  type: git
-  source:
-    uri: ((plugin_repo_git_url))
-    private_key: ((git_private_key))
+# - name: plugin-site
+#   type: git
+#   source:
+#     uri: ((plugin_repo_git_url))
+#     private_key: ((git_private_key))
 
 - name: version
   type: semver

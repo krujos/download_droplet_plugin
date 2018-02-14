@@ -1,0 +1,22 @@
+---
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: ubuntu
+
+inputs:
+- name: built-plugins
+- name: version
+- name: source
+
+params:
+  CF_API: ((cf_api))
+  CF_USER: ((cf_username))
+  CF_PASS: ((cf_password))
+  CF_ORG: ((cf_org))
+  CF_SPACE: ((cf_space))
+  CF_APP: ((cf_app))
+
+run:
+  path: source/ci/tasks/run-integration-tests.sh

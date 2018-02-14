@@ -60,10 +60,12 @@ jobs:
     - get: version
   - task: ensure-dependencies
     file: source/ci/tasks/ensure-dependencies.yml
-  - task: run-tests
+  - task: run-unit-tests
     file: source/ci/tasks/run-unit-tests.yml
   - task: build-plugin
     file: source/ci/tasks/build-plugin.yml
+  - task: run-integration-tests
+    file: source/ci/tasks/run-integration-tests.yml  
   - task: prepare-draft-release
     file: source/ci/tasks/prepare-draft-release.yml
   - put: draft-releases

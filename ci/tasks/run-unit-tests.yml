@@ -1,0 +1,16 @@
+---
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: golang
+
+inputs:
+- name: dependencies
+  path: go/src/github.com/krujos/download_droplet_plugin
+
+outputs:
+- name: tested
+
+run:
+  path: go/src/github.com/krujos/download_droplet_plugin/ci/tasks/run-unit-tests.sh

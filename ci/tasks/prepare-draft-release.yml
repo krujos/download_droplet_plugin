@@ -1,0 +1,17 @@
+---
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: golang
+
+inputs:
+- name: source
+- name: version
+- name: built-plugins
+
+outputs:
+- name: prepared-release
+
+run:
+  path: source/ci/tasks/prepare-draft-release.sh

@@ -14,27 +14,34 @@ build:
     - script:
         name: Get dependencies
         code: |-
-            go get github.com/tools/godep
+            go get -u github.com/golang/dep/cmd/dep
+            go install github.com/golang/dep
             go get github.com/onsi/ginkgo
             go get github.com/onsi/gomega
             go install github.com/onsi/ginkgo/ginkgo
+    # Ensure dependencies exist in vendor directory
+    - script:
+      name: dep ensure
+      code: |
+        dep ensure
+
     # Build the project do we need this?
     - script:
-        name: godep go build
+        name: go build
         code: |
-          godep go build ./...
+          go build ./...
 
     # Test the project
     - script:
         name: test
         code: |
-          godep go test ./...
+          go test ./...
 
     # Integration test
     - script:
         name: Integration test
         code: |
-         godep go build
+         go build
          wget https://cli.run.pivotal.io/stable\?release\=linux64-binary\&source\=github -O cli.tgz
          tar -xvf cli.tgz
          chmod +x ./cf

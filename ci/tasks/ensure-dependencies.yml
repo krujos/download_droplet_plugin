@@ -1,0 +1,16 @@
+---
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: golang
+
+inputs:
+- name: source
+  path: go/src/github.com/krujos/download_droplet_plugin
+
+outputs:
+- name: dependencies
+
+run:
+  path: go/src/github.com/krujos/download_droplet_plugin/ci/tasks/ensure-dependencies.sh

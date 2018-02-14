@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/blang/semver"
 	"github.com/cloudfoundry/cli/plugin"
 	"github.com/krujos/download_droplet_plugin/droplet"
 )
@@ -12,6 +13,13 @@ import (
 type DownloadDropletCmd struct {
 	Drop        droplet.Droplet
 	initializer PluginInitializer
+}
+
+var version = "0.0.0"
+var defaultVersion = plugin.VersionType{
+	Major: -1,
+	Minor: -1,
+	Build: -1,
 }
 
 //PluginInitializer provides IOC for plugin initialization
@@ -47,13 +55,11 @@ func (initalizer *DownloadDropletCmdInitiliazer) InitializePlugin(
 
 //GetMetadata returns metatada to the CF cli
 func (cmd *DownloadDropletCmd) GetMetadata() plugin.PluginMetadata {
+	version := getPluginVersion()
+
 	return plugin.PluginMetadata{
-		Name: "download-droplet",
-		Version: plugin.VersionType{
-			Major: 1,
-			Minor: 0,
-			Build: 1,
-		},
+		Name:    "download-droplet",
+		Version: version,
 		Commands: []plugin.Command{
 			{
 				Name:     "download-droplet",
@@ -110,4 +116,18 @@ func NewDownloadDropletCmd(initializer PluginInitializer) *DownloadDropletCmd {
 	cmd := DownloadDropletCmd{}
 	cmd.initializer = initializer
 	return &cmd
+}
+
+func getPluginVersion() plugin.VersionType {
+	var versionObj semver.Version
+	var err error
+	if versionObj, err = semver.Make(version); err != nil {
+		return defaultVersion
+	}
+
+	return plugin.VersionType{
+		Major: int(versionObj.Major),
+		Minor: int(versionObj.Minor),
+		Build: int(versionObj.Patch),
+	}
 }
